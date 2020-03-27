@@ -1,27 +1,18 @@
-public class SearchNode {
-    private int[][] board;
+public class SearchNode implements Comparable<SearchNode> {
+    private Board board;
     private int hamming;
     private int moves;
     private int priority;
     private SearchNode previous;
 
-    public SearchNode(int[][] board, int hamming, int moves, int priority, SearchNode previous) {
+    public SearchNode(Board board, int hamming, int moves, SearchNode previous) {
         this.board = board;
         this.hamming = hamming;
         this.moves = moves;
-        this.priority = priority;
         this.previous = previous;
     }
 
-    public SearchNode(int[][] board, int hamming, int moves, int priority) {
-        this.board = board;
-        this.hamming = hamming;
-        this.moves = moves;
-        this.priority = priority;
-        this.previous = null;
-    }
-
-    public int[][] getBoard() {
+    public Board getBoard() {
         return this.board;
     }
 
@@ -39,5 +30,10 @@ public class SearchNode {
 
     public SearchNode getPrevious() {
         return this.previous;
+    }
+
+    @Override
+    public int compareTo(SearchNode o) {
+        return (this.hamming + this.moves) - (o.hamming + o.moves);
     }
 }
