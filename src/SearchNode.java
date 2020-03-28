@@ -1,6 +1,7 @@
 import java.util.Comparator;
 
 public class SearchNode implements Comparable<SearchNode> {
+    public static Comparator<SearchNode> BY_MANHATTAN = new ByManhattan();
     private Board board;
     private int hamming;
     private int moves;
@@ -39,11 +40,7 @@ public class SearchNode implements Comparable<SearchNode> {
         return (this.hamming + this.moves) - (o.hamming + o.moves);
     }
 
-    public static Comparator<SearchNode> byManhattan() {
-        return new ByManhattan();
-    }
-
-    public static class ByManhattan implements Comparator<SearchNode> {
+    private static class ByManhattan implements Comparator<SearchNode> {
 
         @Override
         public int compare(SearchNode o1, SearchNode o2) {
