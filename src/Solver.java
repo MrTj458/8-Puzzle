@@ -15,7 +15,7 @@ public class Solver {
     }
 
     private SearchNode solve() {
-        MinPQ<SearchNode> queue = new MinPQ<>();
+        MinPQ<SearchNode> queue = new MinPQ<>(SearchNode.byManhattan());
         queue.insert(initial);
 
         while (true) {
