@@ -9,9 +9,9 @@ public class Solver {
     private int moves;
 
     public Solver(Board initial) {
-        moves = 1;
-        this.initial = new SearchNode(initial, initial.hamming(), moves, null);
+        this.initial = new SearchNode(initial, initial.hamming(), 0, null);
         finalNode = solve();
+        moves = finalNode.getMoves();
     }
 
     private SearchNode solve() {
@@ -23,9 +23,9 @@ public class Solver {
             if (current.getBoard().isGoal()) {
                 return current;
             }
-            moves++;
             for (Board b : current.getBoard().neighbors()) {
-                queue.insert(new SearchNode(b, b.hamming(), moves, current));
+                if (current.getPrevious() == null || !b.equals(current.getPrevious().getBoard()))
+                    queue.insert(new SearchNode(b, b.hamming(), current.getMoves() + 1, current));
             }
         }
     }
